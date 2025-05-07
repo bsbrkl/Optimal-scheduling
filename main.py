@@ -7,14 +7,15 @@ import pandas as pd
 st.write("你好")
 uploaded_file = st.file_uploader("选择一个文件",type=["xlsx", "xls"])
 if 'df' not in st.session_state:  # 初始化session state
-    st.session_state.List = None
+    st.session_state.df = None
 if uploaded_file is not None:
     # 显示文件信息
     try:
         st.session_state.df = pd.read_excel(uploaded_file,sheet_name=None)
     except Exception as e:
         st.error(f"读取文件时出错: {e}")
-
+else:
+    st.info("请上传一个文件")
 Np=(st.number_input('保证发电Np'))
 low_h=st.number_input('死水位')
 start_h=st.number_input('初水位')
@@ -24,7 +25,7 @@ n_max=st.number_input('最大出力')
 years=int(st.number_input('时间跨度（多少年）'))
 b=st.number_input('惩罚系数')
 num=int(st.number_input('分割成多少份'))
-df=pd.read_excel(uploaded_file,sheet_name=None)
+
 
 if 'List' not in st.session_state:  # 初始化session state
     st.session_state.List = None
