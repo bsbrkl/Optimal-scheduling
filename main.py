@@ -33,7 +33,7 @@ if 'List' not in st.session_state:  # 初始化session state
 click1=st.button('开始')
 if click1:
     with st.spinner('正在运行，请稍候...'):
-        st.session_state.List = list(youhua(df,num,Np,low_h,start_h,end_h,q_low,years,b,n_max))
+        st.session_state.List = list(youhua(st.session_state.df,num,Np,low_h,start_h,end_h,q_low,years,b,n_max))
     st.success('完成!')
 
 click2=st.button('展示')
