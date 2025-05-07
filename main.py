@@ -8,9 +8,12 @@ st.write("你好")
 uploaded_file = st.file_uploader("选择一个文件",type=["xlsx", "xls"])
 if uploaded_file is not None:
     # 显示文件信息
-    st.write("文件名:", uploaded_file.name)
-    st.write("文件类型:", uploaded_file.type)
-    st.write("文件大小:", uploaded_file.size, "bytes")
+    try:
+        st.write("文件名:", uploaded_file.name)
+        st.write("文件类型:", uploaded_file.type)
+        st.write("文件大小:", uploaded_file.size, "bytes")
+    except Exception as e:
+        st.error(f"读取文件时出错: {e}")
 
 Np=(st.number_input('保证发电Np'))
 low_h=st.number_input('死水位')
