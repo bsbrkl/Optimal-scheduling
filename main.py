@@ -3,8 +3,18 @@ import time
 import random
 from utils import youhua
 import pandas as pd
+import matplotlib.pyplot as plt
+plt.rcParams['font.sans-serif']=['SimHei']
+plt.rcParams['axes.unicode_minus']=False
 
-st.write("你好")
+st.title("优化调度")
+
+with st.sidebar:
+    nihao=st.text_input("请输入用户名：")
+    if nihao:
+        st.write(f"你好，{nihao}")
+    st.markdown("[获取源码](https://github.com/bsbrkl/Optimal-scheduling)")
+    st.markdown("[常规调度](https://github.com/bsbrkl/Optimal-scheduling)")
 uploaded_file = st.file_uploader("选择一个文件",type=["xlsx", "xls"])
 if 'df' not in st.session_state:  # 初始化session state
     st.session_state.df = None
@@ -47,6 +57,15 @@ if click2:
     })
 
     st.dataframe(df_list)
+click3=st.button('画图')
 
+if click3:
+    fig, ax = plt.subplots()
+    ax.plot(st.session_state.List[0],color='deepskyblue',label='水位Z')
+    ax.plot(st.session_state.List[1],color='r',label='出力N')
+    ax.plot(st.session_state.List[2],color='orange',label='出流Q')
+    ax.plot(st.session_state.List[3],color='lightgreen',label='弃水q')
+    ax.legend()
+    st.pyplot(fig)
 
 
